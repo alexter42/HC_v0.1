@@ -4,6 +4,15 @@ import pandas
 
 CONTENT = os.listdir("files")
 
+def rename_columns(dtf,n_row):
+    columns_dict = {}
+    names = dtf.columns.values
+    for name in names:
+        new_column_name = re.sub(r'\d', '%d'%n_row, name)
+        columns_dict[name] = new_column_name
+    dtf.rename(columns=columns_dict, inplace=True)
+    return dtf
+
 for x, f in enumerate(CONTENT):
     FILE_CONTENT = pandas.read_excel("files/%s"%f, sheet_name=None, skiprows=2)
 
@@ -12,16 +21,6 @@ for x, f in enumerate(CONTENT):
     for n in range(len(FILE_CONTENT.keys()) - 1):
         SHEETS_LIST.append(n)
     SHEETS_LIST.pop(0)
-
-    def rename_columns(dtf,i):
-        columns_dict = {}
-        names = dtf.columns.values
-        for name in names:
-            new_column_name = re.sub(r'\d', '%d'%i, name)
-            columns_dict[name] = new_column_name
-        dtf.rename(columns=columns_dict, inplace=True)
-        return dtf
-
 
     DF = pandas.DataFrame()
 
