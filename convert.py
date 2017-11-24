@@ -5,7 +5,6 @@ import pandas
 CONTENT = os.listdir("files")
 
 for x, f in enumerate(CONTENT):
-    print f
     FILE_CONTENT = pandas.read_excel("files/%s"%f, sheet_name=None, skiprows=2)
 
     SHEETS_LIST = []
