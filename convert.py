@@ -22,8 +22,8 @@ DF = DF.drop(2)
 
 for i in range(4, len(FILE_CONTENT.index)):
     DF = DF.drop(i)
-
-
+DF = DF.reset_index()
+del DF["index"]
 
 def rename_columns(dtf):
     columns_dict = {}
@@ -36,13 +36,13 @@ def rename_columns(dtf):
         
 for i in range(4, len(FILE_CONTENT.index)):
     current_df = FILE_CONTENT.iloc[[i]]
+    current_df = current_df.reset_index()
     del current_df["ocid"]
     del current_df["id"]
-
+    del current_df["index"]
     current_df = rename_columns(current_df)
     print current_df
-    print "********************************************************************************", i
+    DF = pandas.concat([DF, current_df],  axis=1)
 
-    DF = pandas.concat([DF, current_df], ignore_index=True)
+DF.to_csv("results.csv", encoding='utf-8')
 
-# DF.to_csv("results.csv")
