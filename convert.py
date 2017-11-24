@@ -42,9 +42,8 @@ for i, e in enumerate(SHEETS_LIST):
             del current_df["ocid"]
             del current_df["id"]
             del current_df["index"]
-        except KeyError: print "no ocid"
+        except KeyError: pass
         current_df = rename_columns(current_df)
-        csv = pandas.concat([DF, current_df],  axis=1)
+        csv = pandas.concat([DF, current_df], axis=1)
 
     csv.to_csv("results.csv", encoding='utf-8')
-
