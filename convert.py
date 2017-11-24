@@ -8,11 +8,10 @@ CONTENT = os.listdir("files")
 FILE_CONTENT = pandas.read_excel("files/%s"%CONTENT[1], sheet_name=None, skiprows=2)
 
 SHEETS_LIST = []
+
 for n in range(len(FILE_CONTENT.keys()) - 1):
     SHEETS_LIST.append(n)
 SHEETS_LIST.pop(0)
-
-print SHEETS_LIST
 
 def rename_columns(dtf):
     columns_dict = {}
@@ -27,7 +26,6 @@ def rename_columns(dtf):
 DF = pandas.DataFrame()
 
 for i, e in enumerate(SHEETS_LIST):
-    print e
     FILE_CONTENT = pandas.read_excel("files/%s"%CONTENT[1], sheet_name=e, skiprows=2)
     if DF.empty:
         DF = FILE_CONTENT
